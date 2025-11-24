@@ -1,0 +1,105 @@
+#!/bin/bash
+
+NO_TESTS=1
+ISSUE_NAME=$(git rev-parse --abbrev-ref HEAD 2>/dev/null | sed 's/feature\///' | sed 's/bugfix\///' | tr _ - | cut -f 1-2 -d- | tr a-z A-Z)
+
+if [ -r nx.json ]
+then
+	FORMAT_CMD="npm run nx -- format:write --all"
+else
+	FORMAT_CMD=true
+fi
+
+if [ -r package.json ]
+then
+	LINT_CMD="lint-staged"
+	if ${LINT_CMD} 2>&1 | grep -q "No valid configuration found."
+	then
+		echo "No lint-staged config found - setting NO_LINT=1"
+		NO_LINT=1
+	fi
+
+	TEST_CMD="npm run test --if-present"
+	NO_TESTS=0
+fi
+
+if [ -r pom.xml ]
+then
+	LINT_CMD="echo No lint in pom.xml supported yet"
+	TEST_CMD="mvn test"
+	NO_TESTS=0
+	NO_LINT=1
+fi
+
+if grep -qs NO_TESTS=1 .env
+then
+	echo Skipping tests due to your .env settings
+	NO_TESTS=1
+fi
+
+if grep -qs NO_LINT=1 .env
+then
+	echo Skipping lint due to your .env settings
+	NO_LINT=1
+fi
+
+if grep -qs NO_FORMAT=1 .env
+then
+	echo Skipping format due to your .env settings
+	NO_FORMAT=1
+fi
+
+while [[ $1 =~ ^- ]]
+do
+	case $1 in
+		--no-lint)
+			NO_LINT=1
+			;;
+		--no-format)
+			NO_FORMAT=1
+			;;
+		--no-push)
+			NO_PUSH=1
+			;;
+		--no-tests)
+			NO_TESTS=1
+			;;
+		--no-verify)
+			GIT_OPTS=$1
+			;;
+		--no-issue|-n)
+			ISSUE_NAME=""
+			;;
+		-x)
+			set -x
+			;;
+		-i)
+			ISSUE_NAME=$2
+			shift
+			;;
+		*)
+			echo Unrecognized parameter $1
+			exit 1
+	esac
+	shift
+done
+
+if [[ $ISSUE_NAME != "" && ! $ISSUE_NAME =~ ^[A-Z][A-Z][A-Z]?[A-Z]?-[0-9]+$ ]]
+then
+	ISSUE_NAME=""
+fi
+
+((!$#)) && echo No commit message as parameter, command ignored! && exit 1
+git status -s > /dev/null || exit 1
+git status -s | grep -q '^??' && echo Untracked files exist, please add them manually if intended: && git status -s && exit 1
+
+([ "$(basename $(pwd))" != "docker-pipeline" ] || (echo "Generating ci-cd docs with labdoc ..." && labdoc generate --repoUrl https://git.tech.rz.db.de/kip/aws/infrastructure/cicd/docker-pipeline )) &&
+([ "$NO_LINT" = "1" ] || ( echo "Linting with ${LINT_CMD} ..." && $LINT_CMD ) ) &&
+([ "$NO_FORMAT" = "1" ] || ( echo "Formatting with ${FORMAT_CMD}..." && $FORMAT_CMD ) ) &&
+([ "$NO_TESTS" = "1" ] || ( echo "Testing with ${TEST_CMD}" && $TEST_CMD ) ) &&
+git add -u . &&
+echo "$*" &&
+echo "Task: $ISSUE_NAME" &&
+(git diff-index --quiet HEAD || git commit -m "$*" -m "Task: $ISSUE_NAME" $GIT_OPTS) &&
+([ "$NO_PUSH" = "1" ] || git push-with-mr $GIT_OPTS ) &&
+echo ✅ OK
