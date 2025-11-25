@@ -7,5 +7,6 @@ mkdir ~/.local
 ln -s $HOME/dotfiles/bin ~/.local
 
 cat ~/dotfiles/.bashrc >> ~/.bashrc
+cat ~/dotfiles/.zshrc >> ~/.zshrc
 
-echo Custom setup done! Git commands are now available.
+ln -s ~/dotfiles/{.p10k.zsh,.zsh_aliases,.zsh_functions} ~
