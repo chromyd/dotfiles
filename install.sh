@@ -10,3 +10,5 @@ cat ~/dotfiles/.bashrc >> ~/.bashrc
 cat ~/dotfiles/.zshrc >> ~/.zshrc
 
 ln -s ~/dotfiles/{.zsh_aliases,.zsh_functions} ~
+
+sed -i 's/^ZSH_THEME="[^"]*"/ZSH_THEME="cypher"/' ~/.zshrc
