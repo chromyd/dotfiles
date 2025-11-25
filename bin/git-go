@@ -2,6 +2,7 @@
 
 NO_TESTS=1
 NO_LINT=1
+
 ISSUE_NAME=$(git rev-parse --abbrev-ref HEAD 2>/dev/null | sed 's/feature\///' | sed 's/bugfix\///' | tr _ - | cut -f 1-2 -d- | tr a-z A-Z)
 
 if [ -r nx.json ]
@@ -103,4 +104,6 @@ echo "$*" &&
 echo "Task: $ISSUE_NAME" &&
 (git diff-index --quiet HEAD || git commit -m "$*" -m "Task: $ISSUE_NAME" $GIT_OPTS) &&
 ([ "$NO_PUSH" = "1" ] || git push-with-mr $GIT_OPTS ) &&
+([ "$(basename $(pwd))" != "aip-aws-services" ] || (echo "Updating project label $ISSUE_NAME ..." && curl --request PUT --header "PRIVATE-TOKEN: $gitlabAccessToken" --url "https://git.tech.rz.db.de/api/v4/projects/217348/labels/$ISSUE_NAME" --data "color=#00CED1" )) &&
+
 echo ✅ OK
