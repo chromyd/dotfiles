@@ -9,7 +9,7 @@ ln -s $HOME/dotfiles/bin ~/.local
 cat ~/dotfiles/.bashrc >> ~/.bashrc
 cat ~/dotfiles/.zshrc >> ~/.zshrc
 
-ln -s ~/dotfiles/{.zsh_aliases,.zsh_functions} ~
+ln -s ~/dotfiles/{.p10k.zsh,.zsh_aliases,.zsh_functions} ~
 
 # Uncomment the next line to change ZSH_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
