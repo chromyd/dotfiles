@@ -11,4 +11,6 @@ cat ~/dotfiles/.zshrc >> ~/.zshrc
 
 ln -s ~/dotfiles/{.zsh_aliases,.zsh_functions} ~
 
-sed -i 's/^ZSH_THEME="[^"]*"/ZSH_THEME="cypher"/' ~/.zshrc
+# Uncomment the next line to change ZSH_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+# sed -i 's/^ZSH_THEME="[^"]*"/ZSH_THEME="cypher"/' ~/.zshrc
