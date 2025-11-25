@@ -1,0 +1,12 @@
+# git
+unalias gco
+
+alias rlock='pnpm i && g add pnpm-lock.yaml && g rebase --continue' 
+
+# showing/counting commits up to main
+alias co='git log --oneline --decorate --color=always | awk "/(main)/ {print; exit} {print}"'
+alias coco='echo $(git log --oneline --decorate --color=always | awk "/(main)/ {print; exit} {print}" | wc -l)'
+alias cco=coco
+
+# git rebase interactive from main
+alias grim='git rebase -i HEAD~$(coco)'

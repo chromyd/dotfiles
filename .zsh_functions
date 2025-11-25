@@ -1,0 +1,19 @@
+function gco() {
+	set -o pipefail
+	git branch -r | grep -w "$*" | sed 's/^ *origin\///' | head -1 | xargs git checkout
+}
+
+function a() {
+	for target in build lint test typecheck
+	do
+		if [[ ${target} = ${1:-}* ]]
+		then
+			echo npm run nx -- affected --base=last-release --target=${target}
+			npm run nx -- affected --base=last-release --target=${target}
+			return
+		fi	
+	done
+
+	echo npm run nx -- affected --base=last-release --target=$1
+	npm run nx -- affected --base=last-release --target=$1
+}
