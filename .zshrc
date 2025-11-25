@@ -9,3 +9,4 @@ set -o vi
 
 # For pager in Git
 export LESS="--no-init --quit-if-one-screen -R"
+export GIT_EDITOR=vi

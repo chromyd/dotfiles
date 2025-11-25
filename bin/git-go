@@ -104,6 +104,6 @@ echo "$*" &&
 echo "Task: $ISSUE_NAME" &&
 (git diff-index --quiet HEAD || git commit -m "$*" -m "Task: $ISSUE_NAME" $GIT_OPTS) &&
 ([ "$NO_PUSH" = "1" ] || git push-with-mr $GIT_OPTS ) &&
-([ "$(basename $(pwd))" != "aip-aws-services" ] || (echo "Updating project label $ISSUE_NAME ..." && curl --request PUT --header "PRIVATE-TOKEN: $gitlabAccessToken" --url "https://git.tech.rz.db.de/api/v4/projects/217348/labels/$ISSUE_NAME" --data "color=#00CED1" )) &&
+([ "$(basename $(pwd))" != "aip-aws-services" ] || (echo "Updating project label $ISSUE_NAME ..." && curl -fsS -o ~/.curl.log -X PUT -H "PRIVATE-TOKEN: $gitlabAccessToken" --url "https://git.tech.rz.db.de/api/v4/projects/217348/labels/$ISSUE_NAME" -d "color=#00CED1" )) &&
 
 echo ✅ OK
