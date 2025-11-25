@@ -1,7 +1,7 @@
 # 
 # Personal settings
 #
-
+ZSH_THEME=cypher
 
 [ -f ~/.zsh_functions ] && source ~/.zsh_functions
 [ -f ~/.zsh_aliases ] && source ~/.zsh_aliases
