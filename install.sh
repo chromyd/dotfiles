@@ -11,7 +11,7 @@ ln -s ~/dotfiles/{.p10k.zsh,.zsh_aliases,.zsh_functions} ~
 
 cat ~/dotfiles/.bashrc >> ~/.bashrc
 
-if ${P10K}
+if [ "${P10K}" = "true" ]
 then
     cat ~/dotfiles/.zshrc-p10k >> ~/.zshrc
     sed -i 's/^ZSH_THEME="[^"]*"/ZSH_THEME="powerlevel10k\/powerlevel10k"/' ~/.zshrc

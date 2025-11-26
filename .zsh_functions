@@ -17,3 +17,15 @@ function a() {
 	echo npm run nx -- affected --base=last-release --target=$1
 	npm run nx -- affected --base=last-release --target=$1
 }
+
+function gcc() {
+	git config user.email Dusan.Chromy@deutschebahn.com
+	git config user.name DusanChromy
+	git config list | grep user
+}
+
+function gcp() {
+	git config user.email dusan.chromy@yahoo.de
+	git config user.name chromyd
+	git config list | grep user
+}
