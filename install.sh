@@ -3,7 +3,7 @@
 exec > ~/.dotfiles.log 2>&1  
 set -x
 
-P10K=false
+P10K=true
 
 mkdir ~/.local
 ln -s $HOME/dotfiles/bin ~/.local
