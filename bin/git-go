@@ -106,4 +106,5 @@ echo "Task: $ISSUE_NAME" &&
 ([ "$NO_PUSH" = "1" ] || git push-with-mr $GIT_OPTS ) &&
 ([ "$(basename $(pwd))" != "aip-aws-services" ] || (echo "Updating project label $ISSUE_NAME ..." && curl -fsS -o ~/.curl.log -X PUT -H "PRIVATE-TOKEN: ${customValue1}" --url "https://git.tech.rz.db.de/api/v4/projects/217348/labels/$ISSUE_NAME" -d "color=#00CED1" )) &&
 
+echo
 echo ✅ OK
