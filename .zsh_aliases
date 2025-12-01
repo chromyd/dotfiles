@@ -1,5 +1,6 @@
 # git
 unalias gco
+unalias gcp
 
 alias rlock='pnpm i && g add pnpm-lock.yaml && g rebase --continue' 
 
