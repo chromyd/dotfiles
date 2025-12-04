@@ -95,10 +95,10 @@ git status -s > /dev/null || exit 1
 git status -s | grep -q '^??' && echo Untracked files exist, please add them manually if intended: && git status -s && exit 1
 
 ([ "$(basename $(pwd))" != "docker-pipeline" ] || (echo "Generating ci-cd docs with labdoc ..." && labdoc generate --repoUrl https://git.tech.rz.db.de/kip/aws/infrastructure/cicd/docker-pipeline )) &&
-([ "$NO_LINT" = "1" ] || ( echo "Linting with ${LINT_CMD} ..." && $LINT_CMD ) ) &&
 ([ "$NO_FORMAT" = "1" ] || ( echo "Formatting with ${FORMAT_CMD}..." && $FORMAT_CMD ) ) &&
 ([ "$NO_TESTS" = "1" ] || ( echo "Testing with ${TEST_CMD}" && $TEST_CMD ) ) &&
 git add -u . &&
+([ "$NO_LINT" = "1" ] || ( echo "Linting with ${LINT_CMD} ..." && $LINT_CMD ) ) &&
 echo "$*" &&
 echo "Task: $ISSUE_NAME" &&
 (git diff-index --quiet HEAD || git commit -m "$*" -m "Task: $ISSUE_NAME" $GIT_OPTS) &&
