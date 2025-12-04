@@ -14,7 +14,7 @@ fi
 if [ -r package.json ]
 then
 	LINT_CMD="CI=true npx lint-staged"
-	if ${LINT_CMD} 2>&1 | grep -q "No valid configuration found."
+	if eval ${LINT_CMD} 2>&1 | grep -q "No valid configuration found."
 	then
 		echo "No lint-staged config found - setting NO_LINT=1"
 		NO_LINT=1
@@ -98,7 +98,7 @@ git status -s | grep -q '^??' && echo Untracked files exist, please add them man
 ([ "$NO_FORMAT" = "1" ] || ( echo "Formatting with ${FORMAT_CMD}..." && $FORMAT_CMD ) ) &&
 ([ "$NO_TESTS" = "1" ] || ( echo "Testing with ${TEST_CMD}" && $TEST_CMD ) ) &&
 git add -u . &&
-([ "$NO_LINT" = "1" ] || ( echo "Linting with ${LINT_CMD} ..." && $LINT_CMD ) ) &&
+([ "$NO_LINT" = "1" ] || ( echo "Linting with eval ${LINT_CMD} ..." && eval $LINT_CMD ) ) &&
 echo "$*" &&
 echo "Task: $ISSUE_NAME" &&
 (git diff-index --quiet HEAD || git commit -m "$*" -m "Task: $ISSUE_NAME" $GIT_OPTS) &&
