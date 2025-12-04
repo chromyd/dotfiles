@@ -1,8 +1,6 @@
 #!/bin/bash
 
 NO_TESTS=${NO_TESTS:-1}
-NO_LINT=${NO_LINT:-1}
-NO_FORMAT=${NO_FORMAT:-1}
 
 ISSUE_NAME=$(git rev-parse --abbrev-ref HEAD 2>/dev/null | sed 's/feature\///' | sed 's/bugfix\///' | tr _ - | cut -f 1-2 -d- | tr a-z A-Z)
 
@@ -15,7 +13,7 @@ fi
 
 if [ -r package.json ]
 then
-	LINT_CMD="lint-staged"
+	LINT_CMD="CI=true npx lint-staged"
 	if ${LINT_CMD} 2>&1 | grep -q "No valid configuration found."
 	then
 		echo "No lint-staged config found - setting NO_LINT=1"
