@@ -29,3 +29,12 @@ function gcp() {
 	git config user.name chromyd
 	git config list | grep user
 }
+
+function nxr() {
+	if [ -z "${PROJECT}" ]
+	then
+		npm run nx -- run $1
+	else
+		npm run nx -- run ${PROJECT}:$1
+	fi
+}
