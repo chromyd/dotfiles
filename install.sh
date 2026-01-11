@@ -7,7 +7,7 @@ P10K=true
 
 mkdir ~/.local
 ln -s $HOME/dotfiles/bin ~/.local
-ln -s ~/dotfiles/{.p10k.zsh,.zsh_aliases,.zsh_functions} ~
+ln -s ~/dotfiles/{.p10k.zsh,.zsh_aliases,.zsh_functions,.gitignore} ~
 
 cat ~/dotfiles/.bashrc >> ~/.bashrc
 
