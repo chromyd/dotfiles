@@ -47,12 +47,7 @@ function projects() {
 }
 
 function c4() {
-	if [ -z "$*"]
-	then
-		PROJECTS=$(projects)
-	else
-		PROJECTS=$*
-	fi
+	PROJECTS="${*:-$(projects)}"
 
 	for project in ${PROJECTS}
 	do
