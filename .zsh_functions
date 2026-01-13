@@ -39,8 +39,22 @@ function nxr() {
 	fi
 }
 
+function projects() {
+	{
+		git status -s | cut -f 3 -d ' ' | grep '^apps' | cut -f 2 -d /
+		git status -s | cut -f 3 -d ' ' | grep '^libs' | cut -f 3 -d /
+	} | sort | uniq	
+}
+
 function c4() {
-	for project in $*
+	if [ -z "$*"]
+	then
+		PROJECTS=$(projects)
+	else
+		PROJECTS=$*
+	fi
+
+	for project in ${PROJECTS}
 	do
 		echo Checking ${project}...
 		npm run nx -- run ${project}:build &&
