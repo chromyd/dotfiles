@@ -47,7 +47,7 @@ function projects() {
 }
 
 function c4() {
-	PROJECTS="${*:-$(projects)}"
+	PROJECTS=${*:-$(projects)}
 
 	for project in ${PROJECTS}
 	do
