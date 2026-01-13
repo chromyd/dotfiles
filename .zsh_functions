@@ -47,9 +47,11 @@ function projects() {
 }
 
 function c4() {
-	PROJECTS=${*:-$(projects)}
+	if [ $# -eq 0 ]; then
+		set -- $(projects)
+	fi
 
-	for project in ${PROJECTS}
+	for project in "$@"; do	
 	do
 		echo Checking ${project}...
 		npm run nx -- run ${project}:build &&
