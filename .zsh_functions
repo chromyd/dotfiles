@@ -51,7 +51,7 @@ function c4() {
 		set -- $(projects)
 	fi
 
-	for project in "$@"; do	
+	for project in "$@"
 	do
 		echo Checking ${project}...
 		npm run nx -- run ${project}:build &&
