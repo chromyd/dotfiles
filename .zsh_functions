@@ -57,7 +57,7 @@ function c4() {
 		npm run nx -- run ${project}:build &&
 		npm run nx -- run ${project}:typecheck &&
 		npm run nx -- run ${project}:lint &&
-		npm run nx -- run ${project}:test || { echo "❌ failed (${project})"; exit 1 }
+		npm run nx -- run ${project}:test || { echo "❌ failed (${project})"; return 1 }
 	done
 	echo "✅ OK ($@)"
 }
