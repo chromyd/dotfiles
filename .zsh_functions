@@ -54,10 +54,12 @@ function c4() {
 	for project in "$@"
 	do
 		echo Checking ${project}...
-		npm run nx -- run ${project}:build &&
-		npm run nx -- run ${project}:typecheck &&
-		npm run nx -- run ${project}:lint &&
-		npm run nx -- run ${project}:test &&
-		echo ✅ OK
+		{
+			npm run nx -- run ${project}:build &&
+			npm run nx -- run ${project}:typecheck &&
+			npm run nx -- run ${project}:lint &&
+			npm run nx -- run ${project}:test
+		} || exit 1
 	done
+	echo ✅ OK
 }
