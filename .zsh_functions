@@ -38,3 +38,15 @@ function nxr() {
 		npm run nx -- run ${PROJECT}:$1
 	fi
 }
+
+function c4() {
+	for project in $*
+	do
+		echo Checking ${project}...
+		npm run nx -- run ${project}:build &&
+		npm run nx -- run ${project}:typecheck &&
+		npm run nx -- run ${project}:lint &&
+		npm run nx -- run ${project}:test &&
+		echo ✅ OK
+	done
+}
