@@ -11,3 +11,6 @@ alias cco=coco
 
 # git rebase interactive from main
 alias grim='git rebase -i HEAD~$(coco)'
+
+# voice feedback
+alias say='if [ $? -eq 0 ]; then ssh ${customValue2} say command succeeded; else ssh ${customValue2} say command failed; fi'
