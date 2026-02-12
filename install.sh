@@ -24,7 +24,7 @@ else
     # sed -i 's/^ZSH_THEME="[^"]*"/ZSH_THEME="af-magic"/' ~/.zshrc
 fi
 
-if [ ! -z "${customValue3}"]
+if [ ! -z "${customValue3}" ]
 then
     mkdir -p ~/.ssh
     chmod 700 ~/.ssh
