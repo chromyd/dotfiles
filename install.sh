@@ -29,6 +29,6 @@ then
     mkdir -p ~/.ssh
     chmod 700 ~/.ssh
     cp ~/dotfiles/id_rsa.pub ~/.ssh
-    cat ${customValue3} >> ~/.ssh/id_rsa
+    echo "${customValue3}" > ~/.ssh/id_rsa
     chmod 600 ~/.ssh/id_rsa
 fi
