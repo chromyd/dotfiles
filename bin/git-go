@@ -3,6 +3,12 @@
 NO_TESTS=${NO_TESTS:-1}
 NO_LINT=${NO_LINT:-1}
 
+if [ ! -d .git ]
+then
+	echo "There is no .git directory here - please run this script in the root directory of your project - exiting" >&2
+	exit 1
+fi
+
 ISSUE_NAME=$(git rev-parse --abbrev-ref HEAD 2>/dev/null | sed 's/feature\///' | sed 's/bugfix\///' | tr _ - | cut -f 1-2 -d- | tr a-z A-Z)
 
 if [ -r nx.json ]
