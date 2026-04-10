@@ -17,7 +17,7 @@ do
 			shift
 			;;
 		-l)
-			EXTRA_LABEL_OPTION="-o merge_request.label=\"$2\""
+			EXTRA_LABEL_OPTION="-o merge_request.label=$2"
 			shift
 			;;
 		*)
