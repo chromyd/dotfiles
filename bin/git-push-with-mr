@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Usage: git push-with-mr
 # Prerequisite: This script must be executable and in your PATH.
 # Recommendation: This script works best with git option push.autoSetupRemote on - see https://git-scm.com/docs/git-push#Documentation/git-push.txt-pushautoSetupRemote
