@@ -5,7 +5,12 @@ set -x
 
 P10K=true
 
-mkdir ~/.local
+mkdir -p ~/.local/bin
+# symlink each script individually so we coexist with kiro-cli et al.
+for f in "$HOME"/dotfiles/bin/*; do
+    ln -sf "$f" ~/.local/bin/
+done
+
 ln -s $HOME/dotfiles/bin ~/.local
 ln -s ~/dotfiles/{.p10k.zsh,.zsh_aliases,.zsh_functions} ~
 ln -s ~/dotfiles/_gitignore ~/.gitignore
