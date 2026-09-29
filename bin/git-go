@@ -19,7 +19,7 @@ ISSUE_NAME=$(git rev-parse --abbrev-ref HEAD 2>/dev/null | sed 's/feature\///' |
 
 if [ -r nx.json ]
 then
-	FORMAT_CMD="npm run nx -- format:write --all"
+	FORMAT_CMD="npm run nx -- format:write --uncommitted --staged"
 else
 	FORMAT_CMD=true
 fi
