@@ -30,13 +30,5 @@ else
     # sed -i 's/^ZSH_THEME="[^"]*"/ZSH_THEME="af-magic"/' ~/.zshrc
 fi
 
+# Stop logging so that any sensitive information can be processed
 set +x
-if [ ! -z "${customValue3}" ]
-then
-    mkdir -p ~/.ssh
-    chmod 700 ~/.ssh
-    echo "${customValue3}" > ~/.ssh/id_rsa
-    chmod 600 ~/.ssh/id_rsa
-    ssh-keygen -y -f ~/.ssh/id_rsa > ~/.ssh/id_rsa.pub
-    chmod 644 ~/.ssh/id_rsa.pub
-fi

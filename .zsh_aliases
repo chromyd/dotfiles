@@ -12,8 +12,5 @@ alias cco=coco
 # git rebase interactive from main
 alias grim='git rebase -i HEAD~$(coco)'
 
-# voice feedback
-alias s='ssh ${customValue2}'
-
 # kiro login
 alias login='kiro-cli login --use-device-flow --license pro --identity-provider https://d-99671a01cd.awsapps.com/start --region eu-central-1'
