@@ -65,9 +65,9 @@ function c4() {
 function kiro() {
 	if kiro-cli whoami > /dev/null
 	then
-		kiro-cli agent caveman
+		kiro-cli --agent caveman
 	else
 		kiro-cli login --use-device-flow --license pro --identity-provider https://d-99671a01cd.awsapps.com/start --region eu-central-1 &&
-		kiro-cli agent caveman
+		kiro-cli --agent caveman
 	fi
 }

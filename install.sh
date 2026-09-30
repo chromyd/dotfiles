@@ -15,6 +15,8 @@ ln -s $HOME/dotfiles/bin ~/.local
 ln -s ~/dotfiles/{.p10k.zsh,.zsh_aliases,.zsh_functions} ~
 ln -s ~/dotfiles/_gitignore ~/.gitignore
 ln -s ~/dotfiles/.amazonq /aip-aws-services
+mkdir -p ~/.kiro/agents
+ln -s ~/dotfiles/.kiro/agents/caveman.json ~/.kiro/agents
 
 cat ~/dotfiles/.bashrc >> ~/.bashrc
 
