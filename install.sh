@@ -1,7 +1,7 @@
 #!/bin/bash
 
 exec > ~/.dotfiles.log 2>&1  
-set -x
+set -ex
 
 P10K=true
 
@@ -11,12 +11,11 @@ for f in "$HOME"/dotfiles/bin/*; do
     ln -sf "$f" ~/.local/bin/
 done
 
-ln -s $HOME/dotfiles/bin ~/.local
-ln -s ~/dotfiles/{.p10k.zsh,.zsh_aliases,.zsh_functions} ~
-ln -s ~/dotfiles/_gitignore ~/.gitignore
-ln -s ~/dotfiles/.amazonq /aip-aws-services
+ln -sf ~/dotfiles/{.p10k.zsh,.zsh_aliases,.zsh_functions} ~
+ln -sf ~/dotfiles/_gitignore ~/.gitignore
+ln -sf ~/dotfiles/.amazonq /aip-aws-services
 mkdir -p ~/.kiro/agents
-ln -s ~/dotfiles/.kiro/agents/caveman.json ~/.kiro/agents
+ln -sf ~/dotfiles/.kiro/agents/caveman.json ~/.kiro/agents
 
 cat ~/dotfiles/.bashrc >> ~/.bashrc
 
@@ -36,6 +35,7 @@ then
     mkdir -p ~/.ssh
     chmod 700 ~/.ssh
     cp ~/dotfiles/id_rsa.pub ~/.ssh
+    set +x
     echo "${customValue3}" > ~/.ssh/id_rsa
     chmod 600 ~/.ssh/id_rsa
 fi
