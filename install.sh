@@ -30,12 +30,12 @@ else
     # sed -i 's/^ZSH_THEME="[^"]*"/ZSH_THEME="af-magic"/' ~/.zshrc
 fi
 
+set +x
 if [ ! -z "${customValue3}" ]
 then
     mkdir -p ~/.ssh
     chmod 700 ~/.ssh
     cp ~/dotfiles/id_rsa.pub ~/.ssh
-    set +x
     echo "${customValue3}" > ~/.ssh/id_rsa
     chmod 600 ~/.ssh/id_rsa
 fi
