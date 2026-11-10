@@ -5,7 +5,14 @@
 # You can set this option globally by running:
 # git config --global push.autosetupremote true
 
-MR_TITLE=$(git rev-parse --abbrev-ref HEAD 2>/dev/null | tr '-' ' ' | sed 's/AIPD /AIPD-/i' | sed 's/AIPO /AIPO-/i')
+BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+
+if [[ $BRANCH_NAME =~ ^[0-9]+- ]]
+then
+	MR_TITLE=$(echo "$BRANCH_NAME" | sed 's/^[0-9]*-//' | tr '-' ' ')
+else
+	MR_TITLE=$(echo "$BRANCH_NAME" | tr '-' ' ' | sed 's/AIPD /AIPD-/i' | sed 's/AIPO /AIPO-/i')
+fi
 ISSUE_NO=${MR_TITLE%% *}
 EXTRA_LABEL_OPTION=""
 
@@ -29,9 +36,9 @@ done
 
 case ${REQUIRE_ISSUE:-y} in
     y*)
-        if [ $(expr ${ISSUE_NO} : 'AIP[DO]-[0-9][0-9]*$') = 0 ]
+        if [ $(expr ${ISSUE_NO} : 'AIP[DO]-[0-9][0-9]*$') = 0 ] && [ $(expr ${ISSUE_NO} : '#[0-9][0-9]*$') = 0 ]
         then
-            echo "The detected issue number \"${ISSUE_NO}\" is not \"AIPD-\" or \"AIPO-\" followed by a number."
+            echo "The detected issue number \"${ISSUE_NO}\" is not \"AIPD-\" or \"AIPO-\" followed by a number, nor \"#\" followed by a number."
             echo "If you want to continue without detecting an issue number please execute:"
             echo
             echo "export REQUIRE_ISSUE=n"
