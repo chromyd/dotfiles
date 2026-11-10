@@ -13,6 +13,7 @@ then
 else
 	MR_TITLE=$(echo "$BRANCH_NAME" | tr '-' ' ' | sed 's/AIPD /AIPD-/i' | sed 's/AIPO /AIPO-/i')
 fi
+
 ISSUE_NO=${MR_TITLE%% *}
 EXTRA_LABEL_OPTION=""
 
@@ -46,16 +47,10 @@ case ${REQUIRE_ISSUE:-y} in
             echo "and then \"git push-with-mr\" again"
             exit 1
         fi
-        cat << EOF
-git push -o merge_request.create -o merge_request.title="${MR_TITLE}" -o merge_request.label="${ISSUE_NO}" ${EXTRA_LABEL_OPTION} $*
-EOF
-
-        git push -o merge_request.create -o merge_request.title="${MR_TITLE}" -o merge_request.label="${ISSUE_NO}" ${EXTRA_LABEL_OPTION} $*
-        exit
 esac
 
 cat << EOF
-git push -o merge_request.create -o merge_request.title="${MR_TITLE}" $*
+git push -o merge_request.create -o merge_request.title="${MR_TITLE}" ${EXTRA_LABEL_OPTION} $*
 EOF
 
-git push -o merge_request.create -o merge_request.title="${MR_TITLE}" $*
+git push -o merge_request.create -o merge_request.title="${MR_TITLE}" ${EXTRA_LABEL_OPTION} $*
